@@ -20,6 +20,12 @@ func SaveData(path string, data []byte) error {
 		return err
 	}
 
+	err = fp.Sync()
+	if err != nil {
+		os.Remove(tmp)
+		return err
+	}
+
 	return os.Rename(tmp, path)
 }
 
